@@ -15,10 +15,10 @@ An alternative python interpreter that accepts german keywords
 | `assert`     | `prüfe`     |
 | `break`      | `brechen`    |
 | `class`      | `klasse`     |
-| `continue`   | `fortfahren` |
-| `def`        | `definiere`  |
+| `continue`   | `fortsetze` |
+| `def`        | `def`  |
 | `del`        | `lösche`     |
-| `elif`       | `sonstwenn`  |
+| `elif`       | `andernfalls`  |
 | `else`       | `sonst`      |
 | `except`     | `ausgenommen`|
 | `False`      | `Falsch`     |
@@ -42,4 +42,4 @@ An alternative python interpreter that accepts german keywords
 | `try`        | `versuche`   |
 | `while`      | `solange`    |
 | `with`       | `mit`        |
-| `yield`      | `ertrag`     |
+| `yield`      | `erzeuge`     |
