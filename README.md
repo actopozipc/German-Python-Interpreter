@@ -22,7 +22,7 @@ An alternative python interpreter that accepts german keywords
 | `else`       | `sonst`      |
 | `except`     | `ausgenommen`|
 | `False`      | `Falsch`     |
-| `finally`    | `schließlich`|
+| `finally`    | `finalisierend`|
 | `for`        | `für`        |
 | `from`       | `von`        |
 | `global`     | `global`     |
@@ -36,7 +36,7 @@ An alternative python interpreter that accepts german keywords
 | `not`        | `nicht`      |
 | `or`         | `oder`       |
 | `pass`       | `passe`|
-| `raise`      | `hebean`     |
+| `raise`      | `erhöhe`     |
 | `return`     | `Rückkehr`   |
 | `True`       | `Wahr`       |
 | `try`        | `versuche`   |
