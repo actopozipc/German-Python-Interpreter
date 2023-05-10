@@ -43,3 +43,8 @@ An alternative python interpreter that accepts german keywords
 | `while`      | `solange`    |
 | `with`       | `mit`        |
 | `yield`      | `erzeuge`     |
+
+## TODO
+* More german exceptions
+* German exception messages
+* Intellisense support
