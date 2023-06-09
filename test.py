@@ -1,5 +1,5 @@
 importiere numpy als np
-von numpy importiere Wurzel
+von numpy importiere wurzel
 klasse Person:
     def __init__(selbst, name, alter):
         selbst.name = name
@@ -20,16 +20,16 @@ solange zahl > 0:
     zahl -= 1
 
 liste = [1, 2, 3, 4, 5, 7, 8]
-für element in liste:
+für element aus liste:
     wenn element == 1:
-        fortsetze
+        fortsetzen
     andernfalls element == 7:
-        breche
-    drucke(f'Die Wurzel von {element} ist {np.Wurzel(element)}.')
+        abbrechen
+    drucke(f'Die Wurzel von {element} ist {np.wurzel(element)}.')
     
 versuche:
     1 / 0
-ausnahme Nullteilungsfehler als e:
+erlaube Nullteilungsfehler als e:
     drucke(f'Division durch Null: {e}.')
 schlussendlich:
     drucke('Das Programm ist fertig')
