@@ -54,20 +54,19 @@ An alternative python interpreter that accepts german keywords
 | `NameError` | 'Namensfehler' |
 | `IndexError` | 'Indexfehler' |
 | `KeyError` | 'Schlüsselfehler' |
-| `FileNotFoundError` | 'Datei nicht gefunden' |
+| `FileNotFoundError` | 'DateiNichtGefundenFehler' |
 | `SyntaxError` | 'Syntaxfehler' |
 | `IndentationError` | 'Einrückungsfehler' |
 | `ImportError` | 'Importfehler' |
-| `ModuleNotFoundError` | 'Modul nicht gefunden' |
-| `ZeroDivisionError` | 'Division durch Null' |
+| `ModuleNotFoundError` | 'ModulNichtGefundenFehler' |
+| `ZeroDivisionError` | 'Nullteilungsfehler' |
 | `ArithmeticError` | 'Rechenfehler' |
 | `OverflowError` | 'Überlauffehler' |
 | `AssertionError` | 'Behauptungsfehler' |
 | `AttributeError` | 'Attributfehler' |
 | `RuntimeError` | 'Laufzeitfehler' |
 | `KeyError` | 'Schlüsselfehler' |
-| `StopIteration` | 'Iteration beenden' |
-| `FileExistsError` | 'Datei existiert bereits' |
+| `StopIteration` | 'IterationStoppen' |
 | `PermissionError` | 'Berechtigungsfehler' |
 | `TypeError` | 'Typfehler' |
 
