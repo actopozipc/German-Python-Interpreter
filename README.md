@@ -48,28 +48,29 @@ An alternative python interpreter that accepts german keywords
 ### Exceptions
 | Exception | Übersetzung |
 | --- | --- |
-| `Exception` | Ausnahme |
-| `TypeError` | Typfehler |
-| `ValueError` | Wertefehler |
-| `NameError` | Namensfehler |
-| `IndexError` | Indexfehler |
-| `KeyError` | Schlüsselfehler |
-| `FileNotFoundError` | Datei nicht gefunden |
-| `SyntaxError` | Syntaxfehler |
-| `IndentationError` | Einrückungsfehler |
-| `ImportError` | Importfehler |
-| `ModuleNotFoundError` | Modul nicht gefunden |
-| `ZeroDivisionError` | Division durch Null |
-| `ArithmeticError` | Rechenfehler |
-| `OverflowError` | Überlauffehler |
-| `AssertionError` | Behauptungsfehler |
-| `AttributeError` | Attributfehler |
-| `RuntimeError` | Laufzeitfehler |
-| `KeyError` | Schlüsselfehler |
-| `StopIteration` | Iteration beenden |
-| `FileExistsError` | Datei existiert bereits |
-| `PermissionError` | Berechtigungsfehler |
-| `TypeError` | Typfehler |
+| `Exception` | 'Ausnahme' |
+| `TypeError` | 'Typfehler' |
+| `ValueError` | 'Wertefehler' |
+| `NameError` | 'Namensfehler' |
+| `IndexError` | 'Indexfehler' |
+| `KeyError` | 'Schlüsselfehler' |
+| `FileNotFoundError` | 'Datei nicht gefunden' |
+| `SyntaxError` | 'Syntaxfehler' |
+| `IndentationError` | 'Einrückungsfehler' |
+| `ImportError` | 'Importfehler' |
+| `ModuleNotFoundError` | 'Modul nicht gefunden' |
+| `ZeroDivisionError` | 'Division durch Null' |
+| `ArithmeticError` | 'Rechenfehler' |
+| `OverflowError` | 'Überlauffehler' |
+| `AssertionError` | 'Behauptungsfehler' |
+| `AttributeError` | 'Attributfehler' |
+| `RuntimeError` | 'Laufzeitfehler' |
+| `KeyError` | 'Schlüsselfehler' |
+| `StopIteration` | 'Iteration beenden' |
+| `FileExistsError` | 'Datei existiert bereits' |
+| `PermissionError` | 'Berechtigungsfehler' |
+| `TypeError` | 'Typfehler' |
+
 
 ## TODO
 * More german exceptions
