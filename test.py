@@ -31,5 +31,5 @@ versuche:
     1 / 0
 ausnahme Nullteilungsfehler als e:
     drucke(f'Division durch Null: {e}.')
-finalisierend:
+schlussendlich:
     drucke('Das Programm ist fertig')
