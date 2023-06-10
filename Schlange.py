@@ -62,7 +62,7 @@ class KeywordTranslator:
     'Iteration stoppen': 'StopIteration',
     'Tastaturunterbrechung': 'KeyboardInterrupt',
     }
-    #Dictionary to get name of the exception
+    #dictionary to get name of the exception
     exception_translations = {
     'Exception': 'Ausnahme',
     'TypeError': 'Typfehler',
@@ -158,7 +158,7 @@ class KeywordTranslator:
             self.code = f.read()
 
     def translate_keywords(self):
-        # Replace each German keyword with the corresponding English keyword
+        #replace each German keyword with the corresponding English keyword
         for german, english in self.translations.items():
             self.code = self.code.replace(german, english)
         for german, english in self.translation_exceptions.items():
@@ -178,7 +178,7 @@ if __name__ == '__main__':
     try:
         translator.execute()
     except Exception as e:
-    # Übersetze die Exception, wenn sie im Dictionary vorhanden ist
+    #übersetze die Exception, wenn sie im Dictionary vorhanden ist
         translated_message = translator.translate_exception(e)
         print(f'Fehler aufgetreten: {translated_message}')
 
