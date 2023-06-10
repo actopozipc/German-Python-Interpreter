@@ -73,3 +73,6 @@ An alternative python interpreter that accepts german keywords
 
 ## TODO
 * Intellisense support
+* Workaround so that strings do not get altered by the interpreter
+* Executable compiled file that interprets files with .sch extension -> Schlange test.sch should be possible
+
