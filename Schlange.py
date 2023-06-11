@@ -1,10 +1,12 @@
 import argparse
 import re
+import os
+
 class KeywordTranslator:
     translations = {
         'und': 'and',
         'als': 'as',
-        'prÃ¼fe': 'assert',
+        'prüfe': 'assert',
         'breche': 'break',
         'klasse': 'class',
         'fortsetze': 'continue',
@@ -15,7 +17,7 @@ class KeywordTranslator:
         'ausnahme': 'except',
         'Falsch': 'False',
         'schlussendlich': 'finally',
-        'fÃ¼r': 'for',
+        'für': 'for',
         'von': 'from',
         'global': 'global',
         'wenn': 'if',
@@ -29,7 +31,7 @@ class KeywordTranslator:
         'oder': 'or',
         'passe': 'pass',
         'erhÃ¶he': 'raise',
-        'RÃ¼ckkehr': 'return',
+        'Rückkehr': 'return',
         'Wahr': 'True',
         'versuche': 'try',
         'solange': 'while',
@@ -48,12 +50,12 @@ class KeywordTranslator:
     'Wertefehler': 'ValueError',
     'Namensfehler': 'NameError',
     'Indexfehler': 'IndexError',
-    'SchlÃ¼sselfehler': 'KeyError',
+    'Schlüsselfehler': 'KeyError',
     'Syntaxfehler': 'SyntaxError',
-    'EinrÃ¼ckungsfehler': 'IndentationError',
+    'Einrückungsfehler': 'IndentationError',
     'Datei nicht gefunden Fehler': 'FileNotFoundError',
     'Nullteilungsfehler': 'ZeroDivisionError',
-    'Ã¼berlauf Fehler': 'OverflowError',
+    'überlauf Fehler': 'OverflowError',
     'Importfehler': 'ImportError',
     'Modul nicht gefunden Fehler': 'ModuleNotFoundError',
     'Attributfehler': 'AttributeError',
@@ -154,7 +156,7 @@ class KeywordTranslator:
         return translated_output
 
     def __init__(self, file_path):
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             self.code = f.read()
 
 
@@ -233,6 +235,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('file', type=str)
     args = parser.parse_args()
+
+    if not args.file.endswith('.sch'):
+        print('Dateiendung muss .sch sein!')
+        exit(-1)
+
+    if not os.path.exists(args.file):
+        print('Datei existiert nicht!')
+        exit(-1)
 
     translator = KeywordTranslator(args.file)
     try:
