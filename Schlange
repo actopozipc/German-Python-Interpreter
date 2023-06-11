@@ -1,0 +1,2 @@
+#!/bin/bash
+python3 Schlange.py $1
