@@ -63,26 +63,8 @@ class KeywordTranslator:
     'Tastaturunterbrechung': 'KeyboardInterrupt',
     }
     #Dictionary to get name of the exception
-    exception_translations = {
-    'Exception': 'Ausnahme',
-    'TypeError': 'Typfehler',
-    'ValueError': 'Wertefehler',
-    'NameError': 'Namensfehler',
-    'IndexError': 'Indexfehler',
-    'KeyError': 'Schlüsselfehler',
-    'SyntaxError': 'Syntaxfehler',
-    'IndentationError': 'Einrückungsfehler',
-    'FileNotFoundError': 'DateiNichtGefundenFehler',
-    'ZeroDivisionError': 'Nullteilungsfehler',
-    'OverflowError': 'ÜberlaufFehler',
-    'ImportError': 'Importfehler',
-    'ModuleNotFoundError': 'ModulNichtGefundenFehler',
-    'AttributeError': 'Attributfehler',
-    'AssertionError': 'Behauptungsfehler',
-    'RuntimeError': 'Laufzeitfehler',
-    'StopIteration': 'IterationStoppen',
-    'KeyboardInterrupt': 'Tastaturunterbrechung',
-    }
+    exception_translations = dict((val,key) for key, val in translation_exceptions.items())
+
     errors_with_placeholders = {
     'unsupported operand type': 'nicht unterstützter Operandentyp',
     'division by zero': 'Division durch Null',
