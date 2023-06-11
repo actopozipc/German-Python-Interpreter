@@ -1,7 +1,10 @@
 # German-Python-Interpreter
 An alternative python interpreter that accepts german keywords
 ## Usage
-    python Schlange.py test.py
+    python Schlange.py test.sch
+or
+
+    ./Schlange test.sch
     
 ## Example
 ![grafik](https://github.com/actopozipc/German-Python-Interpreter/assets/48481041/93bd66c2-1b2d-477d-8943-dc95d7ecc92f)
