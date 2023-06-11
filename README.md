@@ -1,4 +1,4 @@
-# German-Python-Interpreter
+# Schlange, an interpreter for german python
 An alternative python interpreter that accepts german keywords
 ## Usage
     python Schlange.py test.sch
