@@ -1,0 +1,1 @@
+drucke("Grüßli Müsli! Alles cool im Pool?")

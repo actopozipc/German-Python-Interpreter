@@ -30,7 +30,7 @@ class KeywordTranslator:
         'nicht': 'not',
         'oder': 'or',
         'passe': 'pass',
-        'erhÃ¶he': 'raise',
+        'erhöhe': 'raise',
         'Rückkehr': 'return',
         'Wahr': 'True',
         'versuche': 'try',
@@ -201,7 +201,7 @@ class KeywordTranslator:
         self.code, self.string_replacements = self.obfuscate_strings(self.code)
 
         for german, english in self.translations.items():
-            self.code = self.code.replace(german, english)
+            self.code = re.sub(r"\b" + re.escape(german) + r"\b", english, self.code) #self.code.replace(german, english)
         for german, english in self.translation_exceptions.items():
             self.code = self.code.replace(german, english)
 
