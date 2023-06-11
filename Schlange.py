@@ -157,12 +157,72 @@ class KeywordTranslator:
         with open(file_path, 'r') as f:
             self.code = f.read()
 
+
+    def split_formmated(self, code: str) -> str:
+        string_pattern = re.compile(r'(f)(\"(.*?)\"|\'(.*?)\')')
+        any_formatted_pattern = re.compile(r'{(.*?)}')
+
+        strings = string_pattern.findall(code)
+        original_strings = [string[1] for string in strings]
+
+        for i, string in enumerate(strings):
+            content = string[1]
+            format_indicator = string[0]
+            quark_type = content[0]
+
+            if format_indicator:
+                formatted = any_formatted_pattern.findall(content)
+                formatted_fitted = [
+                    f'{quark_type} + str({i}) + {quark_type}' for i in formatted]
+                
+                for original, fitted in zip(formatted, formatted_fitted):
+                    content = content.replace(f"{{{original}}}", fitted)
+
+            strings[i] = content
+
+        for original, split in zip(original_strings, strings):
+            code = code.replace(original, split)
+
+        return code
+
+
+    def obfuscate_strings(self, code: str) -> tuple[str, dict[int, str]]:
+        string_pattern = re.compile(r'\"(.*?)\"|\'(.*?)\'')
+
+        strings = string_pattern.findall(code)
+        strings = ["".join(string) for string in strings]
+        string_replacements = {}
+
+        for i, string in enumerate(strings):
+            if re.match(r'^\s*$', string):
+                continue
+
+            string_replacements[i] = string
+            code = code.replace(string, f'__{i}__')
+
+        return code, string_replacements
+
+
+    def deobfuscate_strings(self, code: str, replacements: dict[int, str]) -> str:
+        for i, v in replacements.items():
+            code = code.replace(f'__{i}__', v)
+
+        return code
+
+
     def translate_keywords(self):
         # Replace each German keyword with the corresponding English keyword
+
+        self.code = self.split_formmated(self.code)
+        self.code, self.string_replacements = self.obfuscate_strings(self.code)
+
         for german, english in self.translations.items():
             self.code = self.code.replace(german, english)
         for german, english in self.translation_exceptions.items():
             self.code = self.code.replace(german, english)
+
+        self.code = self.deobfuscate_strings(self.code, self.string_replacements)
+
 
     def execute(self):
         self.translate_keywords()
@@ -181,5 +241,3 @@ if __name__ == '__main__':
     # Übersetze die Exception, wenn sie im Dictionary vorhanden ist
         translated_message = translator.translate_exception(e)
         print(f'Fehler aufgetreten: {translated_message}')
-
-
