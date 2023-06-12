@@ -16,5 +16,5 @@ wurzel = berechne_wurzel(zahl)
 
 # Ausgabe der Ergebnisse
 drucke("Die Wurzel von", zahl, "ist:", wurzel)
-vergleich = mathe.Wurzel(zahl)
+vergleich = mathe.wurzel(zahl)
 drucke("Vergleich mit mathe.Wurzel:", vergleich)
