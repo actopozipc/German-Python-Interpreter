@@ -1,5 +1,5 @@
 importiere numpy als np
-von numpy importiere Wurzel
+von numpy importiere wurzel
 klasse Person:
     def __init__(selbst, name, alter):
         selbst.name = name
@@ -25,7 +25,7 @@ für element in liste:
         fortsetze
     andernfalls element == 7:
         breche
-    drucke(f'Die Wurzel von {element} ist {np.Wurzel(element)}.')
+    drucke(f'Die Wurzel von {element} ist {np.wurzel(element)}.')
     
 versuche:
     1 / 0
