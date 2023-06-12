@@ -41,7 +41,7 @@ class KeywordTranslator:
         "selbst" : "self",
         "drucke" : "print",
         "mathe" : "math",
-        "Wurzel" : "sqrt"
+        "wurzel" : "sqrt"
     }
     #dictionary to interpret the exceptions
     translation_exceptions = {
