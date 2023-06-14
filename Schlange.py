@@ -206,7 +206,6 @@ class KeywordTranslator:
             self.code = self.code.replace(german, english)
 
         self.code = self.deobfuscate_strings(self.code, self.string_replacements)
-        print(self.code)
 
     def execute(self):
         self.translate_keywords()
@@ -230,7 +229,6 @@ if __name__ == '__main__':
     try:
         translator.execute()
     except Exception as e:
-        raise e
     # Übersetze die Exception, wenn sie im Dictionary vorhanden ist
         translated_message = translator.translate_exception(e)
         print(f'Fehler aufgetreten: {translated_message}')
