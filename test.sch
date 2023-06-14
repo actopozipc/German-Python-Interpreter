@@ -1,6 +1,6 @@
 importiere numpy als np
 von numpy importiere wurzel
-klasse Person:
+Klasse Person:
     def __init__(selbst, name, alter):
         selbst.name = name
         selbst.alter = alter
@@ -29,7 +29,7 @@ für element in liste:
     
 versuche:
     1 / 0
-ausnahme Nullteilungsfehler als e:
+Ausnahme Nullteilungsfehler als e:
     drucke(f'Division durch Null: {e}.')
 schlussendlich:
     drucke('Das Programm ist fertig')

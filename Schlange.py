@@ -8,13 +8,13 @@ class KeywordTranslator:
         'als': 'as',
         'prüfe': 'assert',
         'breche': 'break',
-        'klasse': 'class',
+        'Klasse': 'class',
         'fortsetze': 'continue',
         'def': 'def',
         'lösche': 'del',
         'andernfalls': 'elif',
         'sonst': 'else',
-        'ausnahme': 'except',
+        'Ausnahme': 'except',
         'Falsch': 'False',
         'schlussendlich': 'finally',
         'für': 'for',
@@ -46,23 +46,23 @@ class KeywordTranslator:
     #dictionary to interpret the exceptions
     translation_exceptions = {
     'Ausnahme': 'Exception',
-    'Typfehler': 'TypeError',
-    'Wertefehler': 'ValueError',
-    'Namensfehler': 'NameError',
-    'Indexfehler': 'IndexError',
-    'Schlüsselfehler': 'KeyError',
-    'Syntaxfehler': 'SyntaxError',
-    'Einrückungsfehler': 'IndentationError',
-    'Datei nicht gefunden Fehler': 'FileNotFoundError',
-    'Nullteilungsfehler': 'ZeroDivisionError',
-    'überlauf Fehler': 'OverflowError',
-    'Importfehler': 'ImportError',
-    'Modul nicht gefunden Fehler': 'ModuleNotFoundError',
-    'Attributfehler': 'AttributeError',
-    'Behauptungsfehler': 'AssertionError',
-    'Laufzeitfehler': 'RuntimeError',
-    'Iteration stoppen': 'StopIteration',
-    'Tastaturunterbrechung': 'KeyboardInterrupt',
+    'TypFehler': 'TypeError',
+    'WerteFehler': 'ValueError',
+    'NamensFehler': 'NameError',
+    'IndexFehler': 'IndexError',
+    'SchlüsselFehler': 'KeyError',
+    'SyntaxFehler': 'SyntaxError',
+    'EinrückungsFehler': 'IndentationError',
+    'DateiNichtGefundenFehler': 'FileNotFoundError',
+    'NullteilungsFehler': 'ZeroDivisionError',
+    'überlaufFehler': 'OverflowError',
+    'ImportFehler': 'ImportError',
+    'ModulNichtGefundenFehler': 'ModuleNotFoundError',
+    'AttributFehler': 'AttributeError',
+    'BehauptungsFehler': 'AssertionError',
+    'LaufzeitFehler': 'RuntimeError',
+    'IterationStoppen': 'StopIteration',
+    'TastaturUnterbrechung': 'KeyboardInterrupt',
     }
     #Dictionary to get name of the exception
     exception_translations = dict((val,key) for key, val in translation_exceptions.items())
@@ -206,7 +206,7 @@ class KeywordTranslator:
             self.code = self.code.replace(german, english)
 
         self.code = self.deobfuscate_strings(self.code, self.string_replacements)
-
+        print(self.code)
 
     def execute(self):
         self.translate_keywords()
@@ -230,6 +230,7 @@ if __name__ == '__main__':
     try:
         translator.execute()
     except Exception as e:
+        raise e
     # Übersetze die Exception, wenn sie im Dictionary vorhanden ist
         translated_message = translator.translate_exception(e)
         print(f'Fehler aufgetreten: {translated_message}')
