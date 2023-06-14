@@ -18,13 +18,13 @@ or
 | `as`         | `als`        |
 | `assert`     | `prüfe`     |
 | `break`      | `brechen`    |
-| `class`      | `klasse`     |
+| `class`      | `Klasse`     |
 | `continue`   | `fortsetze` |
 | `def`        | `def`  |
 | `del`        | `lösche`     |
 | `elif`       | `andernfalls`  |
 | `else`       | `sonst`      |
-| `except`     | `ausgenommen`|
+| `except`     | `Ausnahme`|
 | `False`      | `Falsch`     |
 | `finally`    | `schlussendlich`|
 | `for`        | `für`        |
@@ -35,7 +35,7 @@ or
 | `in`         | `in`         |
 | `is`         | `ist`        |
 | `lambda`     | `lambda`     |
-| `None`       | `Keine`      |
+| `None`       | `Nichts`      |
 | `nonlocal`   | `nichtlokal` |
 | `not`        | `nicht`      |
 | `or`         | `oder`       |
@@ -76,3 +76,5 @@ or
 
 ## TODO
 * Intellisense support
+* More function names (built in, numpy, matplotlib)
+* More german keywords (see discussions)
