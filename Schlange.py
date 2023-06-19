@@ -36,12 +36,13 @@ class KeywordTranslator:
         'versuche': 'try',
         'solange': 'while',
         'mit': 'with',
-        'erzeuge': 'yield',
+        'ergebe': 'yield',
         "reichweite" : "range",
         "selbst" : "self",
         "drucke" : "print",
         "mathe" : "math",
-        "wurzel" : "sqrt"
+        "wurzel" : "sqrt",
+        "nächstes" : "next"
     }
     #dictionary to interpret the exceptions
     translation_exceptions = {
