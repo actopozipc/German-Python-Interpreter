@@ -49,7 +49,7 @@ or
 | `yield`      | `erzeuge`     |
 
 ### Exceptions
-| Exception | Übersetzung |
+| Englisch | Deutsch |
 | --- | --- |
 | `Exception` | 'Ausnahme' |
 | `TypeError` | 'Typfehler' |
@@ -72,9 +72,49 @@ or
 | `StopIteration` | 'IterationStoppen' |
 | `PermissionError` | 'Berechtigungsfehler' |
 | `TypeError` | 'Typfehler' |
+### Built-in Functions
+| Englisch      | Deutsch      |
+|--------------|--------------|
+| all          | alle         |
+| any          | irgendein    |
+| breakpoint   | brechpunkt   |
+| callable     | aufrufbar    |
+| compile      | kompiliere   |
+| complex      | komplex      |
+| delattr      | löschattr    |
+| enumerate    | enumerate (missing)   |
+| getattr      | bekommeattr  |
+| globals      | globale      |
+| hasattr      | hatattr      |
+| help         | hilfe        |
+| input        | eingabe      |
+| isinstance   | istinstanz   |
+| issubclass   | istsubklasse |
+| len          | län          |
+| list         | liste        |
+| locals       | lokale       |
+| map          | karte        |
+| next         | nächstes     |
+| object       | objekt       |
+| open         | öffne        |
+| property     | eigenschaft  |
+| range        | reichweite   |
+| reversed     | rückwärts    |
+| round        | runde        |
+| setattr      | setzattr     |
+| sorted       | sortiere     |
+| staticmethod | statischemethode |
+| slice        | slice (missing)        |
+| tuple        | tupel        |
+| type         | typ          |
+| print        | drucke       |
+| math         | mathe        |
+| sqrt         | wurzel       |
+
 
 
 ## TODO
 * Intellisense support
-* More function names (built in, numpy, matplotlib)
+* More function names (numpy, matplotlib)
+* Adding missing translations (enumerate, slice)
 * More german keywords (see discussions)
