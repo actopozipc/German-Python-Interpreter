@@ -6,7 +6,7 @@ def ist_primzahl(zahl):
             Rückkehr Falsch
     Rückkehr Wahr
 # upper bound
-obere_grenze = int(input("Gib die obere Grenze ein: "))
+obere_grenze = int(eingabe("Gib die obere Grenze ein: "))
 
 # list of prime numbers
 primzahlen = []

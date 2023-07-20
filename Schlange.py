@@ -1,7 +1,14 @@
 import argparse
 import re
 import os
+'''
+Naming convention: 
+    Keywords: Written like in german (e.g. Klasse = class) besides Wahr and Falsch (to ensemble pythons True and False)
+    Exceptions: PascalCase (e.g TypFehler for TypeError)
+    Classes: snakeCase
+    (built in) Functions: lowercase (e.g drucke for print)
 
+'''
 class KeywordTranslator:
     translations = {
         'und': 'and',
@@ -37,11 +44,8 @@ class KeywordTranslator:
         'solange': 'while',
         'mit': 'with',
         'erzeuge': 'yield',
-        "reichweite" : "range",
-        "selbst" : "self",
-        "drucke" : "print",
-        "mathe" : "math",
-        "wurzel" : "sqrt"
+        "selbst" : "self"
+
     }
     #dictionary to interpret the exceptions
     translation_exceptions = {
@@ -63,6 +67,45 @@ class KeywordTranslator:
     'LaufzeitFehler': 'RuntimeError',
     'IterationStoppen': 'StopIteration',
     'TastaturUnterbrechung': 'KeyboardInterrupt',
+    }
+    #built in functions
+    translation_functions = {
+
+    "alle" : "all",
+    "irgendein" : "any",
+    "brechpunkt" : "breakpoint",
+    "aufrufbar" : "callable",
+    "kompiliere" : "compile",
+    "komplex" : "complex",
+    "löschattr" : "delattr",
+    "enumerate" : "enumerate", #missing translation
+    "bekommeattr" : "getattr",
+    "globale" : "globals",
+    "hatattr" : "hasattr",
+    "hilfe" : "help",
+    "eingabe" : "input",
+    "istinstanz" : "isinstance",
+    "istsubklasse" : "issubclass",
+    "län" : "len",
+    "liste" : "list",
+    "lokale" : "locals",
+    "karte" : "map",
+    "nächstes" : "next",
+    'objekt' : 'object',
+    "öffne" : "open",
+    "eigenschaft" : "property",
+    "reichweite" : "range",
+    "rückwärts" : "reversed",
+    "runde" : "round",
+    "setzattr" : "setattr",
+    "sortiere" : "sorted",
+    "statischemethode" : "staticmethod",
+    "slice" : "slice", #missing translation
+    "tupel" : "tuple",
+    "typ" : "type",
+    "drucke" : "print",
+    "mathe" : "math",
+    "wurzel" : "sqrt"
     }
     #Dictionary to get name of the exception
     exception_translations = dict((val,key) for key, val in translation_exceptions.items())
@@ -203,6 +246,8 @@ class KeywordTranslator:
         for german, english in self.translations.items():
             self.code = re.sub(r"\b" + re.escape(german) + r"\b", english, self.code) #self.code.replace(german, english)
         for german, english in self.translation_exceptions.items():
+            self.code = self.code.replace(german, english)
+        for german, english in self.translation_functions.items():
             self.code = self.code.replace(german, english)
 
         self.code = self.deobfuscate_strings(self.code, self.string_replacements)
