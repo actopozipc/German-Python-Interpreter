@@ -14,6 +14,8 @@ class KeywordTranslator:
         'und': 'and',
         'als': 'as',
         'prüfe': 'assert',
+        'asynch' : 'async',
+        'erwarte' : 'await', 
         'breche': 'break',
         'Klasse': 'class',
         'fortsetze': 'continue',
