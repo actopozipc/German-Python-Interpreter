@@ -244,7 +244,9 @@ class KeywordTranslator:
 
         self.code = self.split_formmated(self.code)
         self.code, self.string_replacements = self.obfuscate_strings(self.code)
-
+        #For some reason, self. keyword does not work with the re.sub
+        #So I hotfixed it with this solution? I am open to better ideas :)
+        self.code = self.code.replace("selbst", "self")
         for german, english in self.translations.items():
             self.code = re.sub(r"\b" + re.escape(german) + r"\b", english, self.code) #self.code.replace(german, english)
         for german, english in self.translation_exceptions.items():

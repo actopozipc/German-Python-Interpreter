@@ -29,7 +29,7 @@ für element in liste:
     
 versuche:
     1 / 0
-Ausnahme Nullteilungsfehler als e:
+Ausnahme NullteilungsFehler als e:
     drucke(f'Division durch Null: {e}.')
 schlussendlich:
     drucke('Das Programm ist fertig')
