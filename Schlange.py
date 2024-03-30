@@ -109,6 +109,22 @@ class KeywordTranslator:
     "mathe" : "math",
     "wurzel" : "sqrt"
     }
+    #I am not quite happy with every translation, because some words do not exist without infinitive without splitting it up, e.g hänge an instead of anhängen
+    #Most of the translations are not in infinitive, but I couldnt work around here
+    translation_array_methods = {
+        "anhängen" : "append",
+        "aufräumen" : "clear",
+        "kopiere" :  "copy",
+        "zähle" : "count",
+        "erweitere" : "extend",
+        "index" : "index",
+        "einsetzen" : "insert",
+        "platze" : "pop",
+        "entferne" : "remove",
+        "umdrehen" : "reverse",
+        "sortiere" : "sort"
+
+    }
     #Dictionary to get name of the exception
     exception_translations = dict((val,key) for key, val in translation_exceptions.items())
 
@@ -253,11 +269,14 @@ class KeywordTranslator:
             self.code = self.code.replace(german, english)
         for german, english in self.translation_functions.items():
             self.code = self.code.replace(german, english)
+        for german, english in self.translation_array_methods.items():
+            self.code = self.code.replace(german, english)
 
         self.code = self.deobfuscate_strings(self.code, self.string_replacements)
 
     def execute(self):
         self.translate_keywords()
+        print(self.code)
         exec(self.code)
 
 
@@ -275,9 +294,11 @@ if __name__ == '__main__':
         exit(-1)
 
     translator = KeywordTranslator(args.file)
+    translator.execute()
     try:
         translator.execute()
     except Exception as e:
     # Übersetze die Exception, wenn sie im Dictionary vorhanden ist
+        
         translated_message = translator.translate_exception(e)
         print(f'Fehler aufgetreten: {translated_message}')
