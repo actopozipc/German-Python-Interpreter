@@ -1,6 +1,9 @@
 import argparse
 import re
 import os
+import sys
+import importlib
+import types
 '''
 Naming convention: 
     Keywords: Written like in german (e.g. Klasse = class) besides Wahr and Falsch (to ensemble pythons True and False)
@@ -14,8 +17,8 @@ class KeywordTranslator:
         'und': 'and',
         'als': 'as',
         'prüfe': 'assert',
-        'asynch' : 'async',
-        'erwarte' : 'await', 
+        'asynch': 'async',
+        'erwarte': 'await',
         'breche': 'break',
         'Klasse': 'class',
         'fortsetze': 'continue',
@@ -46,125 +49,129 @@ class KeywordTranslator:
         'solange': 'while',
         'mit': 'with',
         'erzeuge': 'yield',
-        "selbst" : "self"
-
+        "selbst": "self"
     }
-    #dictionary to interpret the exceptions
+    
     translation_exceptions = {
-    'Ausnahme': 'Exception',
-    'TypFehler': 'TypeError',
-    'WerteFehler': 'ValueError',
-    'NamensFehler': 'NameError',
-    'IndexFehler': 'IndexError',
-    'SchlüsselFehler': 'KeyError',
-    'SyntaxFehler': 'SyntaxError',
-    'EinrückungsFehler': 'IndentationError',
-    'DateiNichtGefundenFehler': 'FileNotFoundError',
-    'NullteilungsFehler': 'ZeroDivisionError',
-    'überlaufFehler': 'OverflowError',
-    'ImportFehler': 'ImportError',
-    'ModulNichtGefundenFehler': 'ModuleNotFoundError',
-    'AttributFehler': 'AttributeError',
-    'BehauptungsFehler': 'AssertionError',
-    'LaufzeitFehler': 'RuntimeError',
-    'IterationStoppen': 'StopIteration',
-    'TastaturUnterbrechung': 'KeyboardInterrupt',
+        'Ausnahme': 'Exception',
+        'TypFehler': 'TypeError',
+        'WerteFehler': 'ValueError',
+        'NamensFehler': 'NameError',
+        'IndexFehler': 'IndexError',
+        'SchlüsselFehler': 'KeyError',
+        'SyntaxFehler': 'SyntaxError',
+        'EinrückungsFehler': 'IndentationError',
+        'DateiNichtGefundenFehler': 'FileNotFoundError',
+        'NullteilungsFehler': 'ZeroDivisionError',
+        'überlaufFehler': 'OverflowError',
+        'ImportFehler': 'ImportError',
+        'ModulNichtGefundenFehler': 'ModuleNotFoundError',
+        'AttributFehler': 'AttributeError',
+        'BehauptungsFehler': 'AssertionError',
+        'LaufzeitFehler': 'RuntimeError',
+        'IterationStoppen': 'StopIteration',
+        'TastaturUnterbrechung': 'KeyboardInterrupt',
     }
-    #built in functions
+
     translation_functions = {
-
-    "alle" : "all",
-    "irgendein" : "any",
-    "brechpunkt" : "breakpoint",
-    "aufrufbar" : "callable",
-    "kompiliere" : "compile",
-    "komplex" : "complex",
-    "löschattr" : "delattr",
-    "enumerate" : "enumerate", #missing translation
-    "bekommeattr" : "getattr",
-    "globale" : "globals",
-    "hatattr" : "hasattr",
-    "hilfe" : "help",
-    "eingabe" : "input",
-    "istinstanz" : "isinstance",
-    "istsubklasse" : "issubclass",
-    "län" : "len",
-    "liste" : "list",
-    "lokale" : "locals",
-    "karte" : "map",
-    "nächstes" : "next",
-    'objekt' : 'object',
-    "öffne" : "open",
-    "eigenschaft" : "property",
-    "reichweite" : "range",
-    "rückwärts" : "reversed",
-    "runde" : "round",
-    "setzattr" : "setattr",
-    "sortiere" : "sorted",
-    "statischemethode" : "staticmethod",
-    "slice" : "slice", #missing translation
-    "tupel" : "tuple",
-    "typ" : "type",
-    "drucke" : "print",
-    "mathe" : "math",
-    "wurzel" : "sqrt"
+        "alle": "all",
+        "irgendein": "any",
+        "brechpunkt": "breakpoint",
+        "aufrufbar": "callable",
+        "kompiliere": "compile",
+        "komplex": "complex",
+        "löschattr": "delattr",
+        "enumerate": "enumerate",
+        "bekommeattr": "getattr",
+        "globale": "globals",
+        "hatattr": "hasattr",
+        "hilfe": "help",
+        "eingabe": "input",
+        "istinstanz": "isinstance",
+        "istsubklasse": "issubclass",
+        "län": "len",
+        "liste": "list",
+        "lokale": "locals",
+        "karte": "map",
+        "nächstes": "next",
+        'objekt': 'object',
+        "öffne": "open",
+        "eigenschaft": "property",
+        "reichweite": "range",
+        "rückwärts": "reversed",
+        "runde": "round",
+        "setzattr": "setattr",
+        "sortiere": "sorted",
+        "statischemethode": "staticmethod",
+        "slice": "slice",
+        "tupel": "tuple",
+        "typ": "type",
+        "drucke": "print",
+        "mathe": "math",
+        "wurzel": "sqrt"
     }
-    #Dictionary to get name of the exception
-    exception_translations = dict((val,key) for key, val in translation_exceptions.items())
 
+
+    exception_translations = dict((val, key) for key, val in translation_exceptions.items())
+    
     errors_with_placeholders = {
-    'unsupported operand type': 'nicht unterstützter Operandentyp',
-    'division by zero': 'Division durch Null',
-    'name \'{}\' is not defined': 'Name \'{}\' ist nicht definiert',
-    'list index out of range': 'Listenindex außerhalb des gültigen Bereichs',
-    'tuple index out of range': 'Tupelindex außerhalb des gültigen Bereichs',
-    'invalid syntax': 'Ungültige Syntax',
-    'indentation error': 'Einrückungsfehler',
-    'file not found': 'Datei nicht gefunden',
-    'attribute \'{}\' not found': 'Attribut \'{}\' nicht gefunden',
-    'module \'{}\' not found': 'Modul \'{}\' nicht gefunden',
-    'division or modulo by zero': 'Division oder Modulo durch Null',
-    'key error': 'Schlüsselfehler',
-    'invalid literal for int() with base {}: \'{}\'': 'Ungültiges Literal für int() mit Basis {}: \'{}\'',
-    'unexpected indent': 'Unerwartete Einrückung',
-    'not a valid identifier': 'Kein gültiger Bezeichner',
-    'invalid syntax, unexpected {}: \'{}\'': 'Ungültige Syntax, unerwartetes {}: \'{}\'',
-    'unsupported operand type(s) for {}: \'{}\' and \'{}\'': 'Nicht unterstützte Operandentypen für {}: \'{}\' und \'{}\'',
+        'unsupported operand type': 'nicht unterstützter Operandentyp',
+        'division by zero': 'Division durch Null',
+        'name \'{}\' is not defined': 'Name \'{}\' ist nicht definiert',
+        'list index out of range': 'Listenindex außerhalb des gültigen Bereichs',
+        'tuple index out of range': 'Tupelindex außerhalb des gültigen Bereichs',
+        'invalid syntax': 'Ungültige Syntax',
+        'indentation error': 'Einrückungsfehler',
+        'file not found': 'Datei nicht gefunden',
+        'attribute \'{}\' not found': 'Attribut \'{}\' nicht gefunden',
+        'module \'{}\' not found': 'Modul \'{}\' nicht gefunden',
+        'division or modulo by zero': 'Division oder Modulo durch Null',
+        'key error': 'Schlüsselfehler',
+        'invalid literal for int() with base {}: \'{}\'': 'Ungültiges Literal für int() mit Basis {}: \'{}\'',
+        'unexpected indent': 'Unerwartete Einrückung',
+        'not a valid identifier': 'Kein gültiger Bezeichner',
+        'invalid syntax, unexpected {}: \'{}\'': 'Ungültige Syntax, unerwartetes {}: \'{}\'',
+        'unsupported operand type(s) for {}: \'{}\' and \'{}\'': 'Nicht unterstützte Operandentypen für {}: \'{}\' und \'{}\'',
+        'No module named \'{}\' ' : 'Kein Modul namens \'{}\'' 
     }
+
     errors_without_placeholders = {
-    'unsupported operand type': 'nicht unterstützter Operandentyp',
-    'division by zero': 'Division durch Null',
-    'name \'\' is not defined': 'Name \'\' ist nicht definiert',
-    'list index out of range': 'Listenindex außerhalb des gültigen Bereichs',
-    'tuple index out of range': 'Tupelindex außerhalb des gültigen Bereichs',
-    'invalid syntax': 'Ungültige Syntax',
-    'indentation error': 'Einrückungsfehler',
-    'file not found': 'Datei nicht gefunden',
-    'attribute \'\' not found': 'Attribut \'{}\' nicht gefunden',
-    'module \'\' not found': 'Modul \'\' nicht gefunden',
-    'division or modulo by zero': 'Division oder Modulo durch Null',
-    'key error': 'Schlüsselfehler',
-    'invalid literal for int() with base {}: \'\'': 'Ungültiges Literal für int() mit Basis {}: \'\'',
-    'unexpected indent': 'Unerwartete Einrückung',
-    'not a valid identifier': 'Kein gültiger Bezeichner',
-    'invalid syntax, unexpected {}: \'\'': 'Ungültige Syntax, unerwartetes {}: \'\'',
-    'unsupported operand type(s) for {}: \'\' and \'\'': 'Nicht unterstützte Operandentypen für {}: \'\' und \'\'',
+        'unsupported operand type': 'nicht unterstützter Operandentyp',
+        'division by zero': 'Division durch Null',
+        'name \'\' is not defined': 'Name \'\' ist nicht definiert',
+        'list index out of range': 'Listenindex außerhalb des gültigen Bereichs',
+        'tuple index out of range': 'Tupelindex außerhalb des gültigen Bereichs',
+        'invalid syntax': 'Ungültige Syntax',
+        'indentation error': 'Einrückungsfehler',
+        'file not found': 'Datei nicht gefunden',
+        'attribute \'\' not found': 'Attribut \'{}\' nicht gefunden',
+        'module \'\' not found': 'Modul \'\' nicht gefunden',
+        'division or modulo by zero': 'Division oder Modulo durch Null',
+        'key error': 'Schlüsselfehler',
+        'invalid literal for int() with base {}: \'\'': 'Ungültiges Literal für int() mit Basis {}: \'\'',
+        'unexpected indent': 'Unerwartete Einrückung',
+        'not a valid identifier': 'Kein gültiger Bezeichner',
+        'invalid syntax, unexpected {}: \'\'': 'Ungültige Syntax, unerwartetes {}: \'\'',
+        'unsupported operand type(s) for {}: \'\' and \'\'': 'Nicht unterstützte Operandentypen für {}: \'\' und \'\'',
+         'No module named \'{}\' ' : 'Kein Modul namens \'{}\'' 
     }
-    #extracts variables, operators,... from exception text
-    def extract_operators(self,error_message):
+
+    def extract_operators(self, error_message):
         pattern = r'\'(.*?)\'|//?|/'
         operators = re.findall(pattern, error_message)
         operators = [op for op in operators if op != '']
         return operators
-    #removes operators
+
     def remove_operators(self, string, operators):
         for operator in operators:
             pattern = re.escape(operator)
             string = re.sub(pattern, '', string)
         return string
-    def translate_exception(self,exception):
-        exception_type = type(exception).__name__ #name of the exception
-        translated_type = self.exception_translations.get(str(exception_type), str(exception_type)) #translated name
+
+    def translate_exception(self, exception):
+        exception_type = type(exception).__name__
+        translated_type = self.exception_translations.get(str(exception_type), str(exception_type))
+        translated_output = None
         for trans in self.errors_with_placeholders:
             try:
                 operators = self.extract_operators(str(exception))
@@ -173,19 +180,20 @@ class KeywordTranslator:
                     e = self.remove_operators(t, operators)
                     translated_output = self.errors_without_placeholders.get(e)
                     for op in operators:
-                        translated_output = translated_output.replace("''", op) 
+                        translated_output = translated_output.replace("''", op)
                     break
-            except Exception as e:
+            except Exception:
                 translated_output = self.errors_with_placeholders.get(str(exception))
         
-        if translated_output is None: #if no translation is available
+        if translated_output is None:
             translated_output = str(exception)
         return translated_output
 
     def __init__(self, file_path):
+        self.file_path = file_path
+        self.module_registry = {}
         with open(file_path, 'r', encoding='utf-8') as f:
             self.code = f.read()
-
 
     def split_formmated(self, code: str) -> str:
         string_pattern = re.compile(r'(f)(\"(.*?)\"|\'(.*?)\')')
@@ -213,59 +221,68 @@ class KeywordTranslator:
             code = code.replace(original, split)
 
         return code
+    def translate(self, part: str) -> str:
+        for german_keyword, english_keyword in self.translations.items():
+            part = re.sub(r'\b{}\b'.format(german_keyword), english_keyword, part)
+        for german_keyword, english_keyword in self.translation_exceptions.items():
+            part = re.sub(r'\b{}\b'.format(german_keyword), english_keyword, part)
+        for german_keyword, english_keyword in self.translation_functions.items():
+            part = re.sub(r'\b{}\b'.format(german_keyword), english_keyword, part)
+        for german_keyword, english_keyword in self.translation_array_methods.items():
+            part = re.sub(r'\b{}\b'.format(german_keyword), english_keyword, part)
+        return part
+    def translate_code(self):
+        translated_code = self.split_formmated(self.code)
+        for german_keyword, english_keyword in self.translations.items():
+            translated_code = re.sub(r'\b{}\b'.format(german_keyword), english_keyword, translated_code)
+        for german_keyword, english_keyword in self.translation_exceptions.items():
+            translated_code = re.sub(r'\b{}\b'.format(german_keyword), english_keyword, translated_code)
+        for german_keyword, english_keyword in self.translation_functions.items():
+            translated_code = re.sub(r'\b{}\b'.format(german_keyword), english_keyword, translated_code)
+        for german_keyword, english_keyword in self.translation_array_methods.items():
+            translated_code = re.sub(r'\b{}\b'.format(german_keyword), english_keyword, translated_code)
+        self.translated_code = translated_code
 
+    def extract_imports(self):
+        imports = re.findall(r'import\s+([a-zA-Z0-9_]+)', self.translated_code)
+        return imports
 
-    def obfuscate_strings(self, code: str) -> tuple[str, dict[int, str]]:
-        string_pattern = re.compile(r'\"(.*?)\"|\'(.*?)\'')
+    def dynamic_import(self, module_name):
+        try:
+            if module_name in self.module_registry:
+                return self.module_registry[module_name]
+            module_code = self.load_module_code(module_name)
+            translated_module_code = self.translate(module_code)
+            module = self.execute_module(module_name, translated_module_code)
+            self.module_registry[module_name] = module
+            return module
+        except ImportError as e:
+            pass #Exception will be handled by the other try except anyway
 
-        strings = string_pattern.findall(code)
-        strings = ["".join(string) for string in strings]
-        string_replacements = {}
+    def load_module_code(self, module_name):
+        try:
+            directory_path = self.file_path.split('/')[0]
+            with open(f"{directory_path}/{module_name}.sch", "r", encoding='utf-8') as f:
+                return f.read()
+        except FileNotFoundError:
+            raise ImportError(f"Modul {module_name} nicht gefunden  ")
 
-        for i, string in enumerate(strings):
-            if re.match(r'^\s*$', string):
-                continue
-
-            string_replacements[i] = string
-            code = code.replace(string, f'__{i}__')
-
-        return code, string_replacements
-
-
-    def deobfuscate_strings(self, code: str, replacements: dict[int, str]) -> str:
-        for i, v in replacements.items():
-            code = code.replace(f'__{i}__', v)
-
-        return code
-
-
-    def translate_keywords(self):
-        # Replace each German keyword with the corresponding English keyword
-
-        self.code = self.split_formmated(self.code)
-        self.code, self.string_replacements = self.obfuscate_strings(self.code)
-        #For some reason, self. keyword does not work with the re.sub
-        #So I hotfixed it with this solution? I am open to better ideas :)
-        self.code = self.code.replace("selbst", "self")
-        for german, english in self.translations.items():
-            self.code = re.sub(r"\b" + re.escape(german) + r"\b", english, self.code) #self.code.replace(german, english)
-        for german, english in self.translation_exceptions.items():
-            self.code = self.code.replace(german, english)
-        for german, english in self.translation_functions.items():
-            self.code = self.code.replace(german, english)
-
-        self.code = self.deobfuscate_strings(self.code, self.string_replacements)
+    def execute_module(self, module_name, code):
+        module = types.ModuleType(module_name)
+        exec(code, module.__dict__)
+        sys.modules[module_name] = module
+        return module
 
     def execute(self):
-        self.translate_keywords()
-        exec(self.code)
+        exec(self.translated_code, globals())
+
+
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('file', type=str)
+    parser = argparse.ArgumentParser(description='Führt eine Schlange-Datei aus')
+    parser.add_argument('file', type=str, help='Pfad zu der Schlange-Datei')
     args = parser.parse_args()
-
     if not args.file.endswith('.sch'):
         print('Dateiendung muss .sch sein!')
         exit(-1)
@@ -273,11 +290,15 @@ if __name__ == '__main__':
     if not os.path.exists(args.file):
         print('Datei existiert nicht!')
         exit(-1)
-
     translator = KeywordTranslator(args.file)
+    translator.translate_code()
+    imports = translator.extract_imports()
+    for module in imports:
+        translator.dynamic_import(module)
     try:
         translator.execute()
     except Exception as e:
     # Übersetze die Exception, wenn sie im Dictionary vorhanden ist
+        
         translated_message = translator.translate_exception(e)
         print(f'Fehler aufgetreten: {translated_message}')
