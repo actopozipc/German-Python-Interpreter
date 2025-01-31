@@ -26,6 +26,7 @@ or
 | `del`        | `lösche`     |
 | `elif`       | `andernfalls`  |
 | `else`       | `sonst`      |
+| `enumerate`       | `enumeriere`      |
 | `except`     | `Ausnahme`|
 | `False`      | `Falsch`     |
 | `finally`    | `schlussendlich`|
@@ -44,6 +45,7 @@ or
 | `pass`       | `passe`|
 | `raise`      | `erhöhe`     |
 | `return`     | `Rückkehr`   |
+| `slice`     | `schneide`   |
 | `True`       | `Wahr`       |
 | `try`        | `versuche`   |
 | `while`      | `solange`    |
