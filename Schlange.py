@@ -26,6 +26,7 @@ class KeywordTranslator:
         'lösche': 'del',
         'andernfalls': 'elif',
         'sonst': 'else',
+        "enumeriere": "enumerate",
         'Ausnahme': 'except',
         'Falsch': 'False',
         'schlussendlich': 'finally',
@@ -49,7 +50,8 @@ class KeywordTranslator:
         'solange': 'while',
         'mit': 'with',
         'erzeuge': 'yield',
-        "selbst": "self"
+        "selbst": "self",
+        "schneide": "slice"
     }
     
     translation_exceptions = {
@@ -110,6 +112,19 @@ class KeywordTranslator:
         "mathe": "math",
         "wurzel": "sqrt"
     }
+    translation_array_methods = {
+            "anhängen": "append",
+            "aufräumen": "clear",
+            "kopiere": "copy",
+            "zähle": "count",
+            "erweitere": "extend",
+            "index": "index",
+            "einsetzen": "insert",
+            "platze": "pop",
+            "entferne": "remove",
+            "umdrehen": "reverse",
+            "sortiere": "sort"
+        }
 
 
     exception_translations = dict((val, key) for key, val in translation_exceptions.items())

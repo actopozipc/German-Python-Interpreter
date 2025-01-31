@@ -18,5 +18,5 @@ für zahl in reichweite(2, obere_grenze + 1):
 
 # output
 drucke("Primzahlen von 2 bis", obere_grenze, ":")
-für primzahl in primzahlen:
-    drucke(primzahl)
+für i,primzahl in enumeriere(primzahlen):
+    drucke(f"Die {i}. Primzahl ist ",primzahl)
